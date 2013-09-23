@@ -1,0 +1,60 @@
+$column: 2 * $line-height
+$gutter: $line-height
+
+$desktop-columns: 12
+$phone-columns: 4
+$tablet-columns: 8
+
+$desktop-width: $desktop-columns * ($column + $gutter)
+$phone-width: $phone-columns * ($column + $gutter)
+$tablet-width: $tablet-columns * ($column + $gutter)
+
+@mixin span-columns($columns:1)
+	width: ($columns * ($column + $gutter) - $gutter)
+	float: left
+	margin:
+		left: 0
+		right: $gutter
+
+.container
+	margin:
+		left: auto
+		right: auto
+		top: $gutter
+		bottom: 0
+
+	width: $desktop-width
+	overflow: hidden
+	padding-left: $gutter
+
+	background: pink
+	padding-top: $gutter
+
+.epsilon .column
+	@include span-columns(2)
+
+.delta .column
+	@include span-columns(3)
+
+.gamma .column
+	@include span-columns(4)
+
+.beta .column
+	@include span-columns(6)
+
+.alpha .column
+	@include span-columns(12)
+
+@media (max-width: $desktop-width + $gutter)
+	.container
+		width: $tablet-width
+	.alpha .column, .gamma .column
+		@include span-columns(8)
+	.delta .column, .epsilon .column, .beta .column
+		@include span-columns(4)
+
+@media (max-width: $tablet-width + $gutter)
+	.container
+		width: $phone-width
+		.column
+			@include span-columns(4)

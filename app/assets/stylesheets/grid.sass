@@ -1,4 +1,4 @@
-$column: 2 * $line-height
+$column: 1.0 * $line-height
 $gutter: $line-height
 
 $desktop-columns: 12
@@ -13,22 +13,27 @@ $tablet-width: $tablet-columns * ($column + $gutter)
 	width: ($columns * ($column + $gutter) - $gutter)
 	float: left
 	margin:
-		left: 0
-		right: $gutter
+		left: $gutter
+		right: 0
 
 .container
 	margin:
 		left: auto
 		right: auto
 		top: $gutter
-		bottom: 0
-
-	width: $desktop-width
+		bottom: $gutter
+	padding:
+		left: 0
+		right: 0
+		top: $gutter
+		bottom: $gutter
+	width: $desktop-width + $gutter
 	overflow: hidden
-	padding-left: $gutter
-
 	background: pink
-	padding-top: $gutter
+
+.alpha, .beta, .gamma, .delta, .epsilon
+	padding: 0
+	overflow: hidden
 
 .epsilon .column
 	@include span-columns(2)

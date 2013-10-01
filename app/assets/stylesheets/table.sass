@@ -1,0 +1,48 @@
+table
+	width: 100%
+	border-collapse: collapse
+	font-family: $secondary-font-family
+	margin-bottom: $line-height
+	&.sortable
+		tr.item
+			cursor: row-resize
+	tr
+		background: rgba(0, 0, 0, 0.1)
+		&[data-target]:hover
+			transition: 0.1s all linear
+			cursor: pointer
+			background: rgba(0, 0, 0, 0.2)
+		td, th
+			text-align: left
+			line-height: $line-height
+			padding: $line-height * 0.5 $line-height * 0.6
+			a				
+				text-decoration: none
+				border: none
+			.ss-icon
+				position: relative
+				top: 3px
+			&.center
+				text-align: center
+			&.right
+				text-align: right
+			&.icon
+				width: 100px
+			&.bold
+				font-weight: 600
+		th
+			background: rgba(0, 0, 0, 0.2)
+		&.ui-sortable-helper
+			box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2)
+		&.placeholder
+			height: 48px
+			*
+				background: rgba(0, 0, 0, 0.1)
+
+	.current
+		color: black
+		text-align: center
+		.toggle
+			color: white
+			&:hover
+				color: black

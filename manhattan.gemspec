@@ -9,4 +9,6 @@ Gem::Specification.new do |s|
   s.files       = ["lib/manhattan.rb"]
   s.homepage    = 'http://manhattan.tivona.me'
   s.add_dependency('sass', '>= 3.2')
+  s.add_dependency('bourbon', '>= 2.1')
+  s.add_dependency('neat', '>= 1.4')
 end

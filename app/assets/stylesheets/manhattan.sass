@@ -1,9 +1,48 @@
-$font-size: 16px
-$line-height: 1.5 * $font-size
+$manhattan-red: rgba(231, 76, 60, 1.0)
+$manhattan-black: rgba(50, 50, 50, 1.0)
+$manhattan-orange: rgba(230, 126, 34, 1.0)
+$manhattan-green: rgba(39, 174, 96,1.0)
 
-@import 'typography'
-@import 'grid'
+$font-size: 18px
+$secondary-font-size: 16px
+$line-height: 1.4 * $font-size
+$font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
+$secondary-font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
+
+$background-color: white
+$highlight-color: $manhattan-orange !default
+
+@import "typography"
+@import "grid"
+@import "form"
+@import "button"
+@import "flash"
+@import "table"
 
 body
 	margin: 0
 	padding: 0
+
+*
+	box-sizing: border-box
+
+.noscript, .ie, .hidden
+	display: none
+
+a, a:visited
+	color: $highlight-color
+	&.button
+		color: $manhattan-black
+	&:hover
+		color: darken($highlight-color, 15%)
+		&.button
+			color: $manhattan-black
+
+.margin-bottom
+	margin-bottom: $line-height !important
+
+.ss-icon
+	&.positive
+		color: $manhattan-green
+	&.negative
+		color: $manhattan-red

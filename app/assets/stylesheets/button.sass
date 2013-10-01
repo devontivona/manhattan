@@ -1,0 +1,31 @@
+a.button, input.button
+	&.disabled, &.disabled:hover, &.disabled:active
+		background: rgba(0, 0, 0, 0.1)
+		color: rgba(0, 0, 0, 0.4)
+		cursor: default
+	outline: none
+	display: inline-block
+	background: $highlight-color
+	color: $manhattan-black
+	border: none
+	transition: 0.1s all linear
+	border-radius: 4px
+	line-height: $line-height * 2
+	padding: 0 $line-height
+	font-weight: 700
+	text-decoration: none
+	text-align: center
+	margin: 0
+	margin-right: $line-height * 0.5
+	box-sizing: border-box
+	&.right
+		margin-right: 0
+		margin-left: $line-height * 0.5
+	&:hover
+		background: lighten($highlight-color, 10%)
+	&:active
+		background: darken($highlight-color, 10%)
+	.column &
+		width: 100%
+		margin-left: 0
+		margin-right: 0

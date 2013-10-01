@@ -30,12 +30,17 @@ body
 	display: none
 
 a, a:visited
+	text-decoration: none
+	border-bottom: 1px dotted $highlight-color
 	color: $highlight-color
 	&.button
+		border-bottom-color: $manhattan-black
 		color: $manhattan-black
 	&:hover
+		border-bottom-color: darken($highlight-color, 15%)
 		color: darken($highlight-color, 15%)
 		&.button
+			border-bottom-color: $manhattan-black
 			color: $manhattan-black
 
 .margin-bottom

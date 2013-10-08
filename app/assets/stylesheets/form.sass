@@ -1,67 +1,93 @@
+span.required, span.error
+	top: - $line-height * 0.1
+	position: relative
+	font-family: $secondary-font-family
+	background: $highlight-color
+	border-radius: 2px
+	color: white
+	display: inline-block
+	line-height: $line-height * 0.7
+	font-size: $secondary-font-size * 0.7
+	font-weight: bold
+	text-transform: uppercase
+	padding: 0 $line-height * 0.2
+	margin: 0
+	margin-right: $line-height * 0.2
+	.input &
+		margin-left: $line-height * 0.2
+
 form
 	span.hint
 		display: block
 		font-family: $secondary-font-family
 		line-height: $line-height
+
 	.input
 		position: relative
 		margin-bottom: $line-height
-		&.date
-			padding: 0
-			overflow: hidden
-			margin-right: $line-height
-			label
-				@include span-columns(12)
-			select
-				@include span-columns(4)
-		select
-			margin-bottom: $line-height
-			@include span-columns(12)
-			display: block
-			height: $line-height * 2.0
-			padding: $line-height * 0.5
-			border: none
-			border-bottom: 3px solid rgba(0, 0, 0, 0.2)
-			background: rgba(0, 0, 0, 0.07)
-			outline: none
-			box-sizing: border-box
-			-webkit-appearance: none
-			border-radius: 0
+		overflow: hidden
+
 		&.hidden
 			margin: 0
-		span.required, span.error
-			top: - $line-height * 0.1
-			font-family: $secondary-font-family
-			background: pink
-			border-radius: 2px
-			color: white
-			display: inline-block
-			line-height: $line-height
-			font-size: $secondary-font-size * 0.8
-			font-weight: bold
-			text-transform: uppercase
-			padding: 0 $line-height * 0.4
-			margin: 0
-			// position: absolute
-			// top: 0
-			// right: 0
-		> input, > textarea
-			display: block
-			height: $line-height * 2.0
-			padding: $line-height * 0.5
-			width: 100%
-			border: none
-			border-bottom: 3px solid rgba(0, 0, 0, 0.2)
-			background: rgba(0, 0, 0, 0.07)
-			outline: none
-			resize: none
-			box-sizing: border-box
-		> textarea
-			height: $line-height * 8.0
+
+		&.date
+			margin-right: $line-height
+			label
+				margin-left: $line-height
+			> .input_wrapper > .select_wrapper
+				@include span-columns(4)
+				select
+					width: 100%
+					margin: 0
+					
 		> label.control-label
-			display: block
+			display: inline-block
 			margin-bottom: $line-height * 0.5
 			text-align: left
+
+		> .input_wrapper
+			> .select_wrapper
+				position: relative
+				overflow: hidden
+				&:after
+					content: "descend"
+					position: absolute
+					top: 2px
+					line-height: $line-height * 2
+					font-size: $font-size * 0.7
+					bottom: $line-height
+					color: rgba(0, 0, 0, 0.3)
+					right: $line-height * 0.5
+					z-index: 1000
+				select
+					width: 100%
+					display: block
+					height: $line-height * 2.0
+					padding: $line-height * 0.5
+					border: none
+					border-bottom: 3px solid rgba(0, 0, 0, 0.2)
+					background: rgba(0, 0, 0, 0.07)
+					outline: none
+					box-sizing: border-box
+					-webkit-appearance: none
+					border-radius: 0
+					position: relative
+
+			> input, > textarea
+				display: block
+				height: $line-height * 2.0
+				padding: $line-height * 0.5
+				width: 100%
+				border: none
+				border-bottom: 3px solid rgba(0, 0, 0, 0.2)
+				background: rgba(0, 0, 0, 0.07)
+				outline: none
+				resize: none
+				box-sizing: border-box
+				
+			> textarea
+				height: $line-height * 8.0
+
 
 		&.check_boxes, &.radio_buttons, &.boolean
 			margin-right: $line-height

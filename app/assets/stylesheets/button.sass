@@ -1,4 +1,4 @@
-a.button, input.button
+a.button, input[type=submit].button
 	&.disabled, &.disabled:hover, &.disabled:active
 		background: rgba(0, 0, 0, 0.1)
 		color: rgba(0, 0, 0, 0.4)
@@ -6,10 +6,9 @@ a.button, input.button
 	outline: none
 	display: inline-block
 	background: $highlight-color
-	color: $manhattan-black
+	color: white !important
 	border: none
 	transition: 0.1s all linear
-	border-radius: 4px
 	line-height: $line-height * 2
 	padding: 0 $line-height
 	font-weight: 700

@@ -1,53 +1,41 @@
-$manhattan-red: rgba(231, 76, 60, 1.0)
-$manhattan-black: rgba(50, 50, 50, 1.0)
-$manhattan-orange: rgba(230, 126, 34, 1.0)
-$manhattan-green: rgba(39, 174, 96,1.0)
+$rhythm: 6px
+$border-radius: 3px
+$font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
 
-$font-size: 18px
 $secondary-font-size: 16px
-$line-height: 1.4 * $font-size
 $font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
 $secondary-font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
 
-$background-color: white
-$highlight-color: $manhattan-orange !default
+// http://flatuicolors.com
+$belize-hole: rgba(41, 128, 185, 1.0)
+$alizarin: rgba(231, 76, 60, 1.0)
+$amethyst: rgba(155, 89, 182, 1.0)
+$clouds: rgba(236, 240, 241, 1.0)
+$nephritis: rgba(39, 174, 96, 1.0)
+$emrald: rgba(46, 204, 113, 1.0)
+$silver: rgba(189, 195, 199, 1.0)
+$solace: rgba(20, 20, 20, 1.0)
+
+$primary-color: $solace
+$highlight-color: $amethyst !default
+
+*
+  box-sizing: border-box
+
+html, body 
+  margin: 0
+  padding: 0
+  position: relative
+  clear: both
+
+.hidden
+  display: none !important
 
 @import "typography"
 @import "grid"
 @import "form"
 @import "button"
-@import "flash"
+@import "list"
 @import "table"
-
-body
-	margin: 0
-	padding: 0
-
-*
-	box-sizing: border-box
-
-.noscript, .ie, .hidden
-	display: none
-
-a, a:visited
-	text-decoration: none
-	border-bottom: 1px dotted $highlight-color
-	color: $highlight-color
-	&.button
-		border-bottom-color: $manhattan-black
-		color: $manhattan-black
-	&:hover
-		border-bottom-color: darken($highlight-color, 15%)
-		color: darken($highlight-color, 15%)
-		&.button
-			border-bottom-color: $manhattan-black
-			color: $manhattan-black
-
-.margin-bottom
-	margin-bottom: $line-height !important
-
-.ss-icon
-	&.positive
-		color: $manhattan-green
-	&.negative
-		color: $manhattan-red
+@import "link"
+@import "flash"

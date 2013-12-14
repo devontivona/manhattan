@@ -1,39 +1,135 @@
-body, input, textarea
-	font-size: $font-size
-	line-height: $line-height
+@mixin baseline-adjust($offset)
+	position: relative
+	top: $offset
+
+@mixin ss-standard
+	font-family: "SSStandard"
+	font-style: normal
+	font-weight: normal
+	text-decoration: none
+	text-rendering: optimizeLegibility
+	white-space: nowrap
+	-moz-font-feature-settings: "liga=1"
+	-moz-font-feature-settings: "liga"
+	-ms-font-feature-settings: "liga" 1
+	-o-font-feature-settings: "liga"
+	font-feature-settings: "liga"
+	-webkit-font-smoothing: antialiased
+
+body, input
 	font-family: $font-family
-	color: $manhattan-black
-	text-align: justify
+	color: $primary-color
+	text-align: left
 
-input, label, .button, textarea, select
-	font-family: $secondary-font-family
-	font-size: $secondary-font-size
-
-h1, h2, h3, h4, h5, h6
-	font-family: $secondary-font-family
+h1, h2, h3, h4, h5, h6, p, span, label, input, blockquote, li
 	margin: 0
 	padding: 0
+	// background: pink
 
-p, h1
-	margin: 
-		top: 0
-		bottom: $line-height
+*
+	line-height: $rhythm * 4
+	font-size: 16px
+	font-weight: 300
+	color: $primary-color
+
+p, li, h4
+	margin-bottom: $rhythm * 2
+
+blockquote, q
+	color: $primary-color
+	$offset: 3px
+	line-height: $rhythm * 6 // 36px
+	font-size: ($rhythm * 5) * 0.8 // 24px
+	border-left: $rhythm solid $highlight-color
+	font-style: italic
+	font-weight: 300
+	display: block
+	margin: 0 0 $rhythm * 2 0
+	padding:
+		top: $rhythm * 2 + $offset
+		bottom: $rhythm * 3 - $offset
+		left: $rhythm * 4
+		right: $rhythm * 12
 
 h1
-	font-size: $font-size * 3
-	line-height: $line-height * 3
+	line-height: $rhythm * 12 // 72px
+	margin-bottom: $rhythm * 3
+	font-size: $rhythm * 12 // 72px
+	font-weight: 900
+	color: $primary-color
 
 h2
-	font-size: $font-size * 2
-	line-height: $line-height * 3
-	position: relative
-	top: - $line-height * 0.1
+	line-height: $rhythm * 8 // 48px
+	margin-bottom: $rhythm * 5
+	font-size: ($rhythm * 8) * 0.8 // 40px
 	font-weight: 300
-	text-transform: uppercase
+	color: $highlight-color
 
 h3
-	font-size: $font-size * 1.3
-	line-height: $line-height * 2
+	line-height: $rhythm * 5 // 30px
+	margin-bottom: $rhythm * 2
+	font-size: ($rhythm * 5) * 0.8 // 24px
+	font-weight: 700
+	color: $primary-color
+
+h4
+	font-weight: 700
+	color: $highlight-color
+
+.input
+	label
+		font-weight: 700
+		line-height: $rhythm * 4
+		margin-bottom: $rhythm
+		font-size: 16px
+	input
+		font-weight: 500
+		line-height: $rhythm * 3
+		height: $rhythm * 7
+		margin-bottom: $rhythm
+		font-size: 16px
+	span
+		line-height: $rhythm * 3
+		margin-bottom: $rhythm * 2
+		font-size: 14px
+		font-weight: 500
+
+.button, input[type=submit], .input.file .input-wrapper
+	$offset: 3px
+	font-size: 14px
+	line-height: $rhythm * 3
+	font-weight: 500
+	text-decoration: none
+	text-align: center
 	margin: 0
-	padding: 0
-	text-transform: uppercase
+	padding:
+		top: $rhythm + $offset
+		bottom: $rhythm * 2 - $offset
+		left: $rhythm * 3
+		right: $rhythm * 3
+	margin-bottom: $rhythm * 2
+
+table
+	th
+		font-weight: 700
+	td
+		font-weight: 300
+
+// h1
+// 	font-size: $font-size * 3
+// 	line-height: $rhythm * 6
+// 	margin-bottom: $rhythm * 4
+
+// h2
+// 	font-size: $font-size * 2
+// 	line-height: $rhythm * 6
+// 	margin-bottom: $rhythm * 4
+
+// input, label, .button, textarea, select
+// 	font-family: $secondary-font-family
+// 	font-size: $secondary-font-size
+
+// p, h1
+// 	margin:
+// 		top: 0
+// 		bottom: $line-height

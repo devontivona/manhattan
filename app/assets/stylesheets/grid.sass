@@ -1,6 +1,5 @@
-$column: 1.0 * $line-height
-$gutter: $line-height
-
+$column: $rhythm * 6
+$gutter: $rhythm * 3
 $desktop-columns: 12
 $phone-columns: 4
 $tablet-columns: 8
@@ -9,24 +8,59 @@ $desktop-width: $desktop-columns * ($column + $gutter)
 $phone-width: $phone-columns * ($column + $gutter)
 $tablet-width: $tablet-columns * ($column + $gutter)
 
+$overlay-color: rgba(200, 200, 200, 0.5)
+$horizontal-overlay-gradient: -webkit-linear-gradient($overlay-color 1px, transparent 1px)
+$vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter, transparent 1px)
+
+// Visual grid for debugging design
+.horizontal-grid
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	z-index: 1000
+	width: 100%
+	background-size: $rhythm $rhythm
+	background-image: $horizontal-overlay-gradient
+
+.vertical-grid
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	z-index: 1000
+	width: 100%
+	background-size: ($column + $gutter) ($column + $gutter)
+	background-position: - ($column + $gutter)
+	background-image: $vertical-overlay-gradient
+
 @mixin span-columns($columns:1)
 	width: ($columns * ($column + $gutter) - $gutter)
 	float: left
-	margin:
-		left: $gutter
-		right: 0
+	margin-right: $gutter
+
+*
+	clear: both
+
+@for $i from 1 through $desktop-columns
+	.grid-#{$i}
+		clear: none
+		@include span-columns($i)
+		.demo &
+			text-align: center
+			background: rgba(0, 0, 0, 0.08)
+			padding: $rhythm
+			margin-bottom: $rhythm * 2
 
 .container
+	position: relative
 	margin:
 		left: auto
 		right: auto
-		top: $gutter
-		bottom: $gutter
-	padding:
-		left: 0
-		right: 0
-		top: $gutter
-		bottom: $gutter
+		top: 0
+		bottom: 0
+	padding: $gutter
+	padding-right: 0
 	width: $desktop-width + $gutter
 	overflow: hidden
 	background: pink

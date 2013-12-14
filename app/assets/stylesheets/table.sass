@@ -1,22 +1,31 @@
 table
 	width: 100%
+	margin-bottom: $rhythm * 4
 	border-collapse: collapse
-	font-family: $secondary-font-family
-	margin-bottom: $line-height
 	&.sortable
 		tr.item
 			cursor: row-resize
 	tr
-		background: rgba(0, 0, 0, 0.1)
 		&[data-target]:hover
 			transition: 0.1s all linear
 			cursor: pointer
-			background: rgba(0, 0, 0, 0.2)
+			td, th
+				background: $highlight-color
+				img
+					border-color: white
+				&, i
+					color: white
+		&:last-child
+			td, th
+				border-bottom: $rhythm solid $highlight-color
 		td, th
-			text-align: left
-			line-height: $line-height
-			padding: $line-height * 0.5 $line-height * 0.6
-			a				
+			padding: $rhythm $rhythm * 2
+			text-align: center
+			&:last-child
+				text-align: right
+			&:first-child
+				text-align: left
+			a
 				text-decoration: none
 				border: none
 			.ss-icon
@@ -31,18 +40,13 @@ table
 			&.bold
 				font-weight: 600
 		th
-			background: rgba(0, 0, 0, 0.2)
+			background: $highlight-color
+			color: white
+		td
+			background: rgba(0, 0, 0, 0.08)
 		&.ui-sortable-helper
 			box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2)
 		&.placeholder
 			height: 48px
 			*
 				background: rgba(0, 0, 0, 0.1)
-
-	.current
-		color: black
-		text-align: center
-		.toggle
-			color: white
-			&:hover
-				color: black

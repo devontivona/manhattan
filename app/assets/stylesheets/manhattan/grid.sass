@@ -1,16 +1,21 @@
-$column: $rhythm * 6
-$gutter: $rhythm * 3
-$desktop-columns: 12
-$phone-columns: 4
-$tablet-columns: 8
+@import "variables"
 
-$desktop-width: $desktop-columns * ($column + $gutter)
-$phone-width: $phone-columns * ($column + $gutter)
-$tablet-width: $tablet-columns * ($column + $gutter)
+$column: 6 !default
+$gutter: 3 !default
+
+$column-width: $rhythm * $column
+$gutter-width: $rhythm * $gutter
+$desktop-columns: 12 !default
+$phone-columns: 12 !default
+$tablet-columns: 12 !default
+
+$desktop-width: $desktop-columns * ($column-width + $gutter-width)
+$phone-width: $phone-columns * ($column-width + $gutter-width)
+$tablet-width: $tablet-columns * ($column-width + $gutter-width)
 
 $overlay-color: rgba(200, 200, 200, 0.5)
 $horizontal-overlay-gradient: -webkit-linear-gradient($overlay-color 1px, transparent 1px)
-$vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter, transparent 1px)
+$vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter-width, transparent 1px)
 
 // Visual grid for debugging design
 .horizontal-grid
@@ -30,14 +35,19 @@ $vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter
 	bottom: 0
 	z-index: 1000
 	width: 100%
-	background-size: ($column + $gutter) ($column + $gutter)
-	background-position: - ($column + $gutter)
+	background-size: ($column-width + $gutter-width) ($column-width + $gutter-width)
+	background-position: - ($column-width + $gutter-width)
 	background-image: $vertical-overlay-gradient
 
-@mixin span-columns($columns:1)
-	width: ($columns * ($column + $gutter) - $gutter)
+@mixin span-columns($column-widths:1)
+	width: ($column-widths * ($column-width + $gutter-width) - $gutter-width)
 	float: left
-	margin-right: $gutter
+	margin-right: $gutter-width
+	img
+		max-width: 100%
+
+@mixin offset-columns($column-widths:1)
+	margin-left: $column-widths * ($column-width + $gutter-width)
 
 *
 	clear: both
@@ -52,6 +62,11 @@ $vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter
 			padding: $rhythm
 			margin-bottom: $rhythm * 2
 
+@for $i from 1 through $desktop-columns
+	.offset-#{$i}
+		@include offset-columns($i)
+
+
 .container
 	position: relative
 	margin:
@@ -59,11 +74,15 @@ $vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter
 		right: auto
 		top: 0
 		bottom: 0
-	padding: $gutter
+	padding: $gutter-width
 	padding-right: 0
-	width: $desktop-width + $gutter
+	width: $desktop-width + $gutter-width
 	overflow: hidden
 	background: pink
+
+.row
+	overflow: hidden
+	clear: both
 
 .alpha, .beta, .gamma, .delta, .epsilon
 	padding: 0
@@ -84,7 +103,7 @@ $vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter
 .alpha .column
 	@include span-columns(12)
 
-@media (max-width: $desktop-width + $gutter)
+@media (max-width: $desktop-width + $gutter-width)
 	.container
 		width: $tablet-width
 	.alpha .column, .gamma .column
@@ -92,7 +111,7 @@ $vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter
 	.delta .column, .epsilon .column, .beta .column
 		@include span-columns(4)
 
-@media (max-width: $tablet-width + $gutter)
+@media (max-width: $tablet-width + $gutter-width)
 	.container
 		width: $phone-width
 		.column

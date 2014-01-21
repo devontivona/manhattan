@@ -1,4 +1,7 @@
 $ ->
+  $("input[type=checkbox]").each ->
+    $(this).click (event) -> 
+      $(this).parent().toggleClass("checked")
 
   $("input[type=file]").each ->
     cancel = $("<div>", { class: "input-wrapper", text: "Remove File" })

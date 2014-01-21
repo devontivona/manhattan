@@ -1,0 +1,22 @@
+@import "variables"
+
+%flash
+  display: inline-block
+  background: $highlight-color
+  color: white
+  border: none
+  border-radius: $border-radius
+  position: relative
+  font-weight: 600
+  width: 100%
+  margin-bottom: $rhythm * 3
+  padding: $rhythm $rhythm * 2
+
+.flash-error, .flash, .flash-success
+  @extend %flash
+
+.flash-error
+  background: $alizarin
+
+.flash-success
+  background: $emrald

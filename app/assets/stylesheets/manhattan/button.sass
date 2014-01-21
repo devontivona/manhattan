@@ -1,0 +1,58 @@
+@import "variables"
+
+%button
+	$offset: 3px
+	font-size: $rhythm * 4 / 1.5
+	line-height: $rhythm * 3
+	font-weight: 500
+	text-decoration: none
+	text-align: center
+	margin: 0
+	padding:
+		top: $rhythm + $offset
+		bottom: $rhythm * 2 - $offset
+		left: $rhythm * 3
+		right: $rhythm * 3
+	margin-bottom: $rhythm * 2
+	&.disabled, &.disabled:hover, &.disabled:active
+		background: rgba(0, 0, 0, 0.1)
+		color: rgba(0, 0, 0, 0.4)
+		cursor: default
+	outline: none
+	display: inline-block
+	background: $highlight-color
+	color: white
+	border: none
+	transition: 0.1s all linear
+	border-radius: $border-radius
+	cursor: pointer
+	position: relative
+	&:hover
+		background: lighten($highlight-color, 10%)
+	&:active
+		background: darken($highlight-color, 10%)
+	input
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		margin: 0
+		padding: 0
+		cursor: pointer
+		opacity: 0
+
+.button
+	@extend %button
+
+.button-large
+	@extend %button
+	font-size: $rhythm * 5 / 1.5
+	line-height: $rhythm * 5
+
+.button-success
+	background: $emrald
+	&:hover
+		background: lighten($emrald, 10%)
+	&:active
+		background: darken($emrald, 10%)

@@ -1,23 +1,20 @@
 @import "variables"
+$offset: 3px
+
+// Element
 
 %button
-	$offset: 3px
 	font-size: $rhythm * 4 / 1.5
 	line-height: $rhythm * 3
-	font-weight: 500
+	font-weight: 400
 	text-decoration: none
 	text-align: center
-	margin: 0
 	padding:
 		top: $rhythm + $offset
 		bottom: $rhythm * 2 - $offset
 		left: $rhythm * 3
 		right: $rhythm * 3
-	margin-bottom: $rhythm * 2
-	&.disabled, &.disabled:hover, &.disabled:active
-		background: rgba(0, 0, 0, 0.1)
-		color: rgba(0, 0, 0, 0.4)
-		cursor: default
+	margin: 0 0 $rhythm * 2 0
 	outline: none
 	display: inline-block
 	background: $highlight-color
@@ -31,28 +28,38 @@
 		background: lighten($highlight-color, 10%)
 	&:active
 		background: darken($highlight-color, 10%)
-	input
-		position: absolute
-		top: 0
-		right: 0
-		bottom: 0
-		left: 0
-		margin: 0
-		padding: 0
-		cursor: pointer
-		opacity: 0
 
-.button
-	@extend %button
+// Modifiers
 
-.button-large
-	@extend %button
+%button--disabled
+	&, &:hover, &:active
+		background: rgba(0, 0, 0, 0.1)
+		color: rgba(0, 0, 0, 0.4)
+		cursor: default
+
+%button--large
 	font-size: $rhythm * 5 / 1.5
 	line-height: $rhythm * 5
 
-.button-success
+%button--success
 	background: $emrald
 	&:hover
 		background: lighten($emrald, 10%)
 	&:active
 		background: darken($emrald, 10%)
+
+%button--white
+	background: white
+	color: $highlight-color
+	&:hover
+		background: darken(white, 5%)
+	&:active
+		background: darken(white, 10%)
+
+// Default Styles
+
+.button
+	@extend %button
+
+input[type=submit]
+	@extend %button

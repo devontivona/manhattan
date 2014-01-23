@@ -1,0 +1,58 @@
+$dropdown-border-color: rgba(0, 0, 0, 0.4)
+
+.dropdown
+  position: relative
+  display: inline-block
+
+ul.dropdown-menu
+  display: none
+  position: absolute
+  background: white
+  list-style: none
+  margin: $rhythm 0 0 0
+  padding: 0
+  border: 1px solid $dropdown-border-color
+  background: white
+  left: 0
+  top: 100%
+  z-index: 1000
+  border-radius: 3px
+  box-shadow: 0px 0px $rhythm rgba(0, 0, 0, 0.2)
+
+  &:after
+    content: " "
+    position: absolute
+    width: 0
+    border: $rhythm solid transparent
+    border-bottom-color: white
+    bottom: 100%
+    left: 50%
+    margin-left: - $rhythm
+
+  &:before
+    content: " "
+    position: absolute
+    width: 0
+    border: $rhythm + 1 solid transparent
+    border-bottom-color: $dropdown-border-color
+    bottom: 100%
+    left: 50%
+    margin-left: - $rhythm - 1
+
+  li
+    margin: 0 
+    a
+      white-space: nowrap
+      text-align: center
+      display: block
+      margin: 0
+      padding: $rhythm / 2 $rhythm * 2
+      color: black
+      transition: 0.1s all linear
+      width: 100%
+      &:hover
+        background: rgba(0, 0, 0, 0.08)
+  li:first-child a
+    border-radius: 2px 2px 0 0
+  li:last-child a
+    border-radius: 0 0 2px 2px

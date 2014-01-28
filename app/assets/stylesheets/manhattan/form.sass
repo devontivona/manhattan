@@ -52,10 +52,15 @@ form
 	// 			opacity: 0
 
 	.input
+		@include user-select-none
+		position: relative
 		margin-bottom: $rhythm * 3
 		label
 			display: block
-		input[type=text], input[type=url], input[type=number], input[type=email], input[type=password]
+		.button
+			margin-bottom: 0
+		input[type=text], input[type=url], input[type=number], input[type=email], input[type=password], select, textarea
+			-webkit-appearance: none
 			background: transparent
 			box-sizing: border-box
 			margin:
@@ -75,13 +80,43 @@ form
 				& + span
 					opacity: 1
 					color: $highlight-color
+		textarea
+			height: $rhythm * 24
+			margin-bottom: $rhythm
+			padding-top: $rhythm * 1.5
+			padding-bottom: $rhythm * 1.5
+			resize: none
+		&.select .input-wrapper, &.country .input-wrapper
+			position: relative
+			&:after
+				@include ss-standard
+				content: "navigatedown"
+				position: absolute
+				right: $rhythm * 2.5
+				top: $rhythm * 3.5
+				line-height: $rhythm * 2
+				font-size: $rhythm * 2
+				color: rgba(0, 0, 0, 0.2)
+				z-index: 1000
 		span
 			display: none
 			color: rgba(0, 0, 0, 0.3)
+		&.radio_buttons, &.check_boxes
+			margin-bottom: $rhythm * 2
+			span.radio, span.checkbox
+				margin: 0 $rhythm * 4 $rhythm 0
+				display: inline-block
+				label
+					display: inline-block
+					font-weight: 400
+					margin-bottom: 0
+				input
+					margin: 0 $rhythm * 2 0 0
+					&:disabled + label
+						color: rgba(0, 0, 0, 0.3)
 		.input-wrapper + span
-			// opacity: 0
 			display: block
-		&.error, &.field_with_errors
+		&.field_with_errors
 			.input-wrapper input, span
 				border-color: $alizarin
 			.input-wrapper + span

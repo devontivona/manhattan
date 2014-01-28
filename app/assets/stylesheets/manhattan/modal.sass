@@ -1,0 +1,45 @@
+.modal
+  display: none
+
+.overlay
+  position: fixed
+  width: auto
+  height: auto
+  margin: 0
+  padding: 0
+  background: rgba(0, 0, 0, 0.6)
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 2000
+  text-align: center
+
+  &:before
+    content: ""
+    display: inline-block
+    height: 100%
+    vertical-align: middle
+
+  .modal
+    text-align: left
+    display: inline-block
+    vertical-align: middle
+    box-shadow: 0 0 $rhythm rgba(0, 0, 0, 0.3)
+    border-radius: $border-radius
+    width: $rhythm * 72
+    min-height: $rhythm * 32
+    background: white
+    padding: $rhythm * 3
+    overflow: hidden
+    h2
+      margin-bottom: $rhythm * 3
+    .modal-toolbar
+      text-align: right
+      padding-top: $rhythm * 3
+      .button
+        display: inline-block
+        margin: 0 0 0 $rhythm
+    .modal-content
+      max-height: $rhythm * 64
+      overflow: scroll

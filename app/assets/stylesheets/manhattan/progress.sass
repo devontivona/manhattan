@@ -1,0 +1,21 @@
+.progress
+  width: 100%
+  border-radius: $border-radius
+  position: relative
+  text-align: left
+  margin-bottom: $rhythm * 4
+  background: transparentize($highlight-color, 0.6)
+  padding: $rhythm 0
+  .progress-label
+    font-weight: 600
+    position: relative
+    z-index: 1000
+    margin-left: $rhythm * 2
+    color: white  
+  .progress-bar
+    background: $highlight-color
+    height: $rhythm * 6
+    position: absolute
+    top: 0
+    border-radius: $border-radius
+    transition: 0.3s all ease-in-out

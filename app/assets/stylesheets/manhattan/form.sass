@@ -116,6 +116,14 @@ form
 						color: rgba(0, 0, 0, 0.3)
 		.input-wrapper + span
 			display: block
+		@for $i from 1 through $desktop-columns
+			$omega: floor($desktop-columns / $i) + "n"
+			&.input--grid-#{$i}
+				.input-wrapper > span
+					clear: none
+					@include span-columns($i)
+					&:nth-child(#{$omega})
+						margin-right: 0
 		&.field_with_errors
 			.input-wrapper input, span
 				border-color: $alizarin

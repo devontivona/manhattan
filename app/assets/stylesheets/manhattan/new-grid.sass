@@ -1,0 +1,122 @@
+@import "variables"
+
+$column: 6 !default
+$gutter: 3 !default
+
+$column-width: $rhythm * $column
+$gutter-width: $rhythm * $gutter
+$desktop-columns: 12 !default
+$phone-columns: 12 !default
+$tablet-columns: 12 !default
+
+$desktop-width: $desktop-columns * ($column-width + $gutter-width)
+$phone-width: $phone-columns * ($column-width + $gutter-width)
+$tablet-width: $tablet-columns * ($column-width + $gutter-width)
+
+$overlay-color: rgba(200, 200, 200, 0.5)
+$horizontal-overlay-gradient: -webkit-linear-gradient($overlay-color 1px, transparent 1px)
+$vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter-width, transparent 1px)
+
+// Visual grid for debugging design
+.horizontal-grid
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	z-index: 1000
+	width: 100%
+	background-size: $rhythm $rhythm
+	background-image: $horizontal-overlay-gradient
+
+.vertical-grid
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	z-index: 1000
+	width: 100%
+	background-size: ($column-width + $gutter-width) ($column-width + $gutter-width)
+	background-position: - ($column-width + $gutter-width)
+	background-image: $vertical-overlay-gradient
+
+@mixin span-columns($column-widths:1)
+	width: $column-widths * ($column-width + $gutter-width)
+	float: left
+	clear: none
+	padding: 
+		left: $gutter-width / 2
+		right: $gutter-width / 2
+	img
+		max-width: 100%
+
+@mixin offset-columns($column-widths:1)
+	margin-left: $column-widths * ($column-width + $gutter-width)
+
+*
+	clear: both
+
+@for $i from 1 through $desktop-columns
+	.grid-#{$i}
+		@include span-columns($i)
+		.demo &
+			text-align: center
+			p
+				background: rgba(0, 0, 0, 0.08)
+				padding: $rhythm
+				display: block
+				margin-bottom: $rhythm * 2
+
+@for $i from 1 through $desktop-columns
+	.offset-#{$i}
+		@include offset-columns($i)
+
+.container
+	position: relative
+	margin:
+		left: auto
+		right: auto
+		top: 0
+		bottom: 0
+	padding: $gutter-width $gutter-width
+	width: $desktop-width + $gutter-width
+	min-width: $desktop-width + $gutter-width
+	overflow: hidden
+	background: pink
+
+.row
+	overflow: hidden
+	clear: both
+	margin: 0 (- $gutter-width / 2)
+
+.alpha, .beta, .gamma, .delta, .epsilon
+	padding: 0
+	overflow: hidden
+
+.epsilon .column
+	@include span-columns(2)
+
+.delta .column
+	@include span-columns(3)
+
+.gamma .column
+	@include span-columns(4)
+
+.beta .column
+	@include span-columns(6)
+
+.alpha .column
+	@include span-columns(12)
+
+@media (max-width: $desktop-width + $gutter-width)
+	.container
+		width: $tablet-width
+	.alpha .column, .gamma .column
+		@include span-columns(8)
+	.delta .column, .epsilon .column, .beta .column
+		@include span-columns(4)
+
+@media (max-width: $tablet-width + $gutter-width)
+	.container
+		width: $phone-width
+		.column
+			@include span-columns(4)

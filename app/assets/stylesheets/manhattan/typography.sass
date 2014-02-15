@@ -54,7 +54,7 @@ p, li, h4, h5
 
 blockquote, q
 	color: $primary-color
-	$offset: 3px
+	$offset: $rhythm / 2
 	line-height: $rhythm * 6 // 36px
 	font-size: ($rhythm * 5) * 0.8 // 24px
 	border-left: $rhythm solid $highlight-color
@@ -69,11 +69,12 @@ blockquote, q
 		right: $rhythm * 12
 
 h1
-	line-height: $rhythm * 12 // 72px
-	margin-bottom: $rhythm * 3
-	font-size: $rhythm * 12 // 72px
-	font-weight: 900
-	color: $primary-color
+	&, & *
+		line-height: $rhythm * 12 // 72px
+		margin-bottom: $rhythm * 3
+		font-size: $rhythm * 12 // 72px
+		font-weight: 900
+		color: $primary-color
 
 h2
 	line-height: $rhythm * 8 // 48px

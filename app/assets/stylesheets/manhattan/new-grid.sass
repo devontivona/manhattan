@@ -1,122 +1,107 @@
 @import "variables"
 
-$column: 6 !default
-$gutter: 3 !default
+// Sources
+// 7 Habits of Highly Effective Media Queries by Brad Frost [http://bradfrostweb.com/blog/post/7-habits-of-highly-effective-media-queries/]
+// Responsive Web Design by Ethan Marcotte [http://alistapart.com/article/responsive-web-design]
+// http://www.chromaticsites.com/blog/responsive-grid-building-sass-and-zen-grids-tale-breakpoint-grid-breakdown-mixin
+// http://nicolasgallagher.com/micro-clearfix-hack/
 
-$column-width: $rhythm * $column
-$gutter-width: $rhythm * $gutter
-$desktop-columns: 12 !default
-$phone-columns: 12 !default
-$tablet-columns: 12 !default
+// Configurable variables in multiples of the rhythms
+$gutter: 4 !default
+$padding: 0 !default
+// This should be set to none or a multiple of a rhythm
+$max: 200 !default
+$targets: xs 0, s 75, m 150, l 200 !default
 
-$desktop-width: $desktop-columns * ($column-width + $gutter-width)
-$phone-width: $phone-columns * ($column-width + $gutter-width)
-$tablet-width: $tablet-columns * ($column-width + $gutter-width)
+// Other configurable variables
+$column-count: 12 !default
+$grid-class-prefix: span !default
 
-$overlay-color: rgba(200, 200, 200, 0.5)
-$horizontal-overlay-gradient: -webkit-linear-gradient($overlay-color 1px, transparent 1px)
-$vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter-width, transparent 1px)
+// Calculated widths
+$padding-width: $padding * $rhythm
+$gutter-width: $gutter * $rhythm
+$max-width: if($max == none, 100%, $max * $rhythm)
 
-// Visual grid for debugging design
-.horizontal-grid
-	position: absolute
-	top: 0
-	left: 0
-	bottom: 0
-	z-index: 1000
-	width: 100%
-	background-size: $rhythm $rhythm
-	background-image: $horizontal-overlay-gradient
+// API for responding to different sizes
+@mixin target($target)
+	@each $candidate in $targets
+		@if $target == nth($candidate, 1)
+			@media screen and (min-width: #{nth($candidate, 2) * $rhythm})
+				@content
 
-.vertical-grid
-	position: absolute
-	top: 0
-	left: 0
-	bottom: 0
-	z-index: 1000
-	width: 100%
-	background-size: ($column-width + $gutter-width) ($column-width + $gutter-width)
-	background-position: - ($column-width + $gutter-width)
-	background-image: $vertical-overlay-gradient
-
-@mixin span-columns($column-widths:1)
-	width: $column-widths * ($column-width + $gutter-width)
+// API for spanning different grid columns
+// Size is the number of columns the item spans
+// Position is the column number the grid items starts on
+@mixin span($size, $position)
+	box-sizing: border-box
+	width: percentage($size / $column-count)
 	float: left
 	clear: none
+	margin-left: percentage(($position - 1) / $column-count)
+	margin-right: -100%
 	padding: 
 		left: $gutter-width / 2
 		right: $gutter-width / 2
-	img
-		max-width: 100%
 
-@mixin offset-columns($column-widths:1)
-	margin-left: $column-widths * ($column-width + $gutter-width)
+%clearfix
+	&:before, &:after
+		content: " "
+		display: table
+	&:after
+		clear: both
 
-*
-	clear: both
-
-@for $i from 1 through $desktop-columns
-	.grid-#{$i}
-		@include span-columns($i)
-		.demo &
-			text-align: center
-			p
-				background: rgba(0, 0, 0, 0.08)
-				padding: $rhythm
-				display: block
-				margin-bottom: $rhythm * 2
-
-@for $i from 1 through $desktop-columns
-	.offset-#{$i}
-		@include offset-columns($i)
-
-.container
+%container
+	@extend clearfix
 	position: relative
 	margin:
 		left: auto
 		right: auto
 		top: 0
 		bottom: 0
-	padding: $gutter-width $gutter-width
-	width: $desktop-width + $gutter-width
-	min-width: $desktop-width + $gutter-width
-	overflow: hidden
-	background: pink
+	padding: 0 $gutter-width + $padding-width
+	width: 100%
+	max-width: $max-width
+	box-sizing: border-box
 
-.row
-	overflow: hidden
-	clear: both
-	margin: 0 (- $gutter-width / 2)
+// API for quickly scaffolding responsive grid layouts
+// @mixin scaffold-grid($grid-list)
+// 	@each $list-item in $grid-list
+// 		@include target(nth($target, 1)
 
-.alpha, .beta, .gamma, .delta, .epsilon
-	padding: 0
-	overflow: hidden
+// Generator for non-semantic grid classes
+// @mixin generate-grid-classes
+// 	@each $target in $targets
+// 		@for $i from 1 through $column-count
+// 			@for $j from 1 through $column-count
+// 				.#{$grid-class-prefix}-#{nth($target, 1)}-#{$i}-#{$j}
+// 					@include target(nth($target, 1))
+// 						&.omega-#{nth($target, 1)} + *
+// 							clear: left !important
+// 						@include span($i, $j)
+// @include generate-grid-classes
 
-.epsilon .column
-	@include span-columns(2)
+// $overlay-color: rgba(200, 200, 200, 0.5)
+// $horizontal-overlay-gradient: -webkit-linear-gradient($overlay-color 1px, transparent 1px)
+// $vertical-overlay-gradient: -webkit-linear-gradient(0deg, $overlay-color $gutter-width, transparent 1px)
 
-.delta .column
-	@include span-columns(3)
+// Visual grid for debugging design
+// .horizontal-grid
+// 	position: absolute
+// 	top: 0
+// 	left: 0
+// 	bottom: 0
+// 	z-index: 1000
+// 	width: 100%
+// 	background-size: $rhythm $rhythm
+// 	background-image: $horizontal-overlay-gradient
 
-.gamma .column
-	@include span-columns(4)
-
-.beta .column
-	@include span-columns(6)
-
-.alpha .column
-	@include span-columns(12)
-
-@media (max-width: $desktop-width + $gutter-width)
-	.container
-		width: $tablet-width
-	.alpha .column, .gamma .column
-		@include span-columns(8)
-	.delta .column, .epsilon .column, .beta .column
-		@include span-columns(4)
-
-@media (max-width: $tablet-width + $gutter-width)
-	.container
-		width: $phone-width
-		.column
-			@include span-columns(4)
+// .vertical-grid
+// 	position: absolute
+// 	top: 0
+// 	left: 0
+// 	bottom: 0
+// 	z-index: 1000
+// 	width: 100%
+// 	background-size: ($column-width + $gutter-width) ($column-width + $gutter-width)
+// 	background-position: - ($column-width + $gutter-width)
+// 	background-image: $vertical-overlay-gradient

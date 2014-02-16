@@ -13,6 +13,9 @@ build/*
 *.xcworkspace
 xcuserdata
 
+# sass noise
+.sass-cache
+
 # svn & cvs
 .svn
 CVS

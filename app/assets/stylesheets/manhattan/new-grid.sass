@@ -63,10 +63,35 @@ $max-width: if($max == none, 100%, $max * $rhythm)
 	max-width: $max-width
 	box-sizing: border-box
 
+@function count-spans($span-list)
+	$count: 0
+	@each $span in $span-list
+		$count: $count + $span
+	@return $count
+
 // API for quickly scaffolding responsive grid layouts
-// @mixin scaffold-grid($grid-list)
-// 	@each $list-item in $grid-list
-// 		@include target(nth($target, 1)
+@mixin scaffold-span($target, $span-list)
+
+	$length: length($span-list)
+
+	// Inflate list if shorter than column count
+	$original-list: $span-list
+	@while count-spans($span-list) < $column-count
+		$span-list: join($span-list, $original-list)
+		$length: length($span-list)
+
+	// Iterate over the span list and generate nth-child rules
+	$column-index: 0
+	@for $index from 1 through length($span-list)
+		$span: nth($span-list, $index)
+		$new-row: ((($column-index % $column-count) + $span) >= $column-count)
+		@include target($target)
+			> *:nth-child(#{$length}n + #{$index})
+				$position: ($column-index % $column-count) + 1
+				@include span($span, $position)
+				& + *
+					clear: if($new-row, left, none)
+		$column-index: $column-index + $span
 
 // Generator for non-semantic grid classes
 // @mixin generate-grid-classes

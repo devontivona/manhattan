@@ -20,7 +20,7 @@ $grid-class-prefix: span !default
 // Calculated widths
 $padding-width: $padding * $rhythm
 $gutter-width: $gutter * $rhythm
-$max-width: if($max == none, 100%, $max * $rhythm)
+$max-width: if($max == 0, 100%, $max * $rhythm)
 
 // API for responding to different sizes
 @mixin target($target)
@@ -51,7 +51,7 @@ $max-width: if($max == none, 100%, $max * $rhythm)
 		clear: both
 
 %container
-	@extend clearfix
+	@extend %clearfix
 	position: relative
 	margin:
 		left: auto

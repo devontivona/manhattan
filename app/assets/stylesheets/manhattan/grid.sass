@@ -11,7 +11,8 @@ $gutter: 4 !default
 $padding: 0 !default
 // This should be set to none or a multiple of a rhythm
 $max: 200 !default
-$targets: xs 0, s 75, m 150, l 200 !default
+$targets: xs 0, s 50, m 100, l 150, xl 200 !default
+$grid-debug: false
 
 // Other configurable variables
 $column-count: 12 !default
@@ -32,26 +33,29 @@ $max-width: if($max == 0, 100%, $max * $rhythm)
 // API for spanning different grid columns
 // Size is the number of columns the item spans
 // Position is the column number the grid items starts on
-@mixin span($size, $position)
+@mixin span($size, $position, $clear: none)
 	box-sizing: border-box
 	width: percentage($size / $column-count)
 	float: left
-	clear: none
+	clear: $clear
 	margin-left: percentage(($position - 1) / $column-count)
 	margin-right: -100%
 	padding: 
 		left: $gutter-width / 2
 		right: $gutter-width / 2
 
-%clearfix
+@mixin clearfix
 	&:before, &:after
 		content: " "
 		display: table
 	&:after
 		clear: both
 
-%container
-	@extend %clearfix
+%clearfix
+	@include clearfix
+
+@mixin container
+	@include clearfix
 	position: relative
 	margin:
 		left: auto
@@ -62,6 +66,9 @@ $max-width: if($max == 0, 100%, $max * $rhythm)
 	width: 100%
 	max-width: $max-width
 	box-sizing: border-box
+
+%container
+	@include container
 
 @function count-spans($span-list)
 	$count: 0
@@ -82,15 +89,16 @@ $max-width: if($max == 0, 100%, $max * $rhythm)
 
 	// Iterate over the span list and generate nth-child rules
 	$column-index: 0
+	$new-row: true
 	@for $index from 1 through length($span-list)
 		$span: nth($span-list, $index)
-		$new-row: ((($column-index % $column-count) + $span) >= $column-count)
 		@include target($target)
 			> *:nth-child(#{$length}n + #{$index})
 				$position: ($column-index % $column-count) + 1
-				@include span($span, $position)
-				& + *
-					clear: if($new-row, left, none)
+				@include span($span, $position, if($new-row, left, none))
+				@if $grid-debug
+					background: transparentize(if($new-row, blue, red), 0.5)
+		$new-row: ((($column-index % $column-count) + $span + 1) >= $column-count)
 		$column-index: $column-index + $span
 
 // Generator for non-semantic grid classes
